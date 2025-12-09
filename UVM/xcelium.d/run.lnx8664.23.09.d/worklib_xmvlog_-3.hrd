@@ -1,0 +1,15 @@
+//
+// File created by:  xrun
+// Do not modify this file
+//
+-sv
+-INCDIR
+/home/cc/Fahad_DV/Final_Project/practice_github/fahad_shah/UVM
+-INCDIR
+/home/cc/Fahad_DV/Final_Project/AES_by_Rijndael/ENCRYPTION_UNIT_V1/CIPHER_UNIT/sv
+-I_INCDIR
+/home/cc/mnt/XCELIUM2309/tools/methodology/UVM/CDNS-1.1d/sv/src
+-DEFINE
+USE_PARAMETERIZED_WRAPPER
+-I_INCDIR
+/home/cc/mnt/XCELIUM2309/tools/methodology/UVM/CDNS-1.1d/additions/sv
