@@ -5,5 +5,3 @@ define SNAPSHOT worklib.aes_top:sv
 DEFINE RUNMODEDEFAULT 1
 DEFINE LIB_MAP (  => worklib )
 DEFINE LIB_MAP ($LIB_MAP, + => worklib )
-define ELAB_SNAPSHOT
-define SNAPSHOT worklib.aes_top:sv

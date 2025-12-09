@@ -5,8 +5,6 @@ timeprecision 100ps;
 import uvm_pkg::*;
  `include "uvm_macros.svh"
 
-
-
   logic CK;                         // Secondary clock/control
   logic enc_dec;                    // 1 = encrypt, 0 = decrypt
   logic [1:0] KL;                   // Key length control
@@ -51,36 +49,31 @@ import uvm_pkg::*;
          bit [1:0] key_length,         // KL value
          bit [31:0] key_array [7:0],     // key
          bit [31:0] state_array [3:0]   // input state
-        //input int delay_cycles              // delay before driving
-        );
-
-    // repeat(delay_cycles)
+                );
       @(posedge CLK);
-
-    drvstart = 1;
+          drvstart = 1;
 
     // Latch values into interface
-    enc_dec <= enc_mode;
-    KL      <= key_length;
-
-    CK      <= 1'b1;
+            enc_dec <= enc_mode;
+            KL      <= key_length;
+            CK      <= 1'b1;
 
     // Drive KEY
-    foreach (KEY[i]) begin
-      KEY[i] <= key_array[i];
-    end
+            foreach (KEY[i]) begin
+              KEY[i] <= key_array[i];
+            end
 
     // Drive State
-    foreach (state_i[i]) begin
-      state_i[i] <= state_array[i];
-    end
-repeat (10) begin 
-    @(posedge CLK);
-end
-   
-    CK <= 1'b0; // pulse complete
+            foreach (state_i[i]) begin
+              state_i[i] <= state_array[i];
+            end
 
-    drvstart = 0;
+        @(posedge CLK);
+
+   
+            CK <= 1'b0; // pulse complete
+
+            drvstart = 0;
   endtask : send_to_dut
 
 
@@ -118,17 +111,18 @@ end
    );
     @(posedge CLK iff (CF == 1'b1));
 
-    //monstart = 1;
+    monstart = 1;
 
     // Collect DUT outputs
     foreach(out_state[i]) begin
+      @(posedge CLK)
         out_state[i] = state_o[i];
     end
 
     // Collect completion flag
     comp_flag = CF;
 
-    //monstart = 0;
+    monstart = 0;
 endtask
 
 

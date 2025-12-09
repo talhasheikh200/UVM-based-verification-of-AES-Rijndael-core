@@ -24,10 +24,10 @@ class aes_driver extends uvm_driver #(aes_packet);
   	endfunction
 	
   	task run_phase(uvm_phase phase);
-    		//fork
+    		fork
       			get_and_drive();
-      			// reset_signals();
-    		//join
+      			 reset_signals();
+    		join
   	endtask
  
     // task get_and_drive();
@@ -48,6 +48,8 @@ class aes_driver extends uvm_driver #(aes_packet);
   	// endtask
 	
 	task get_and_drive();
+	@(posedge vif.CLR);
+	@(negedge vif.CLR);
     forever begin
         seq_item_port.get_next_item(pkt);
 
@@ -68,13 +70,13 @@ endtask
 
 
 	
-	    /*
+	 
   	task reset_signals();
     		forever 
-     			vif.aes_reset();
+     			vif.cipher_reset();
         end
   	endtask
-    */
+  
 
   	// UVM report_phase
   	function void report_phase(uvm_phase phase);
